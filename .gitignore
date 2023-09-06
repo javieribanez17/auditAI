@@ -1,0 +1,8 @@
+#Variables de entorno
+.env
+#Entorno virtual
+venv
+#Archivos ocultos
+.DS_Store
+#Cache
+__pycache__
