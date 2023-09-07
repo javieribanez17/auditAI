@@ -28,7 +28,7 @@ def upload():
         else:
             return render_template('error.html')
     cleanCsv()
-    return render_template('prueba.html')
+    return agentAudit()#render_template('prueba.html')
     
 # @app.route('/xlsx', methods=['POST'])
 # def read_xlsx():
