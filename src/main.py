@@ -63,7 +63,7 @@ def cleanCsv():
     RESULT_DF.to_csv('./data/RESULT.csv', index=False)
 
 # ------------- CALL TO AGENT ----------------------------------------------------------------------------------------------------
-def agentAudit():    
+def agentAudit(question):    
     with get_openai_callback() as cb:
         load_dotenv()
         agent = create_csv_agent(
@@ -79,8 +79,7 @@ def agentAudit():
             verbose=True,
             agent_type=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
         )
-        response = agent.run("Dime el número de identificación de los casos en los que el sexo del usuario sea F y el sexo apto sea M, "+
-                             "también los casos donde el sexo del usuario sea M y el sexo apto sea F.")
+        response = agent.run(question)
         print(cb)
         return response
 agentAudit()

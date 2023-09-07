@@ -13,6 +13,9 @@
 </head>
 
 <body>
+    <div id="loaderContainer">
+        <div id="loader"></div>
+    </div>
     <!-- Barra de navegación Start -->
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <div class="container-fluid">
@@ -56,31 +59,17 @@
                 </button>
             </p>
         </form>
-        <form action="/ask" method="post">
+        <form>
             <div class="form-group">
-                <!-- <% if (respondModel !="" ) { %>
-                    <label for="askModel">Respuesta del modelo GPT:</label>
-                    <textarea class="form-control" disabled="true" id="askModel"
-                        rows="10"><%= respondModel %></textarea>
-
-                    <% } %>
-                        <% if (consultPrev !="" ) { %>
-                            <p>Pregunta realizada: <i><strong>
-                                        <%= consultPrev %>
-                                    </strong></i></p>
-                            <% } %>
-                                <label for="questionModel">Escribe la pregunta que deseas realizar:</label>
-                                <textarea class="form-control" id="questionModel" name="questionModel"
-                                    rows="2"></textarea> -->
                 <label for="askModel">Respuesta del modelo GPT:</label>
-                <textarea class="form-control" disabled="true" id="askModel" rows="10">
+                <textarea class="form-control" disabled="true" id="askModel" rows="10"></textarea>
 
                 <label for="questionModel">Escribe la pregunta que deseas realizar:</label>
-                <textarea class="form-control" id="questionModel" name="questionModel" rows="2"></textarea>
+                <textarea class="form-control" id="questionModel" rows="2"></textarea>
             </div>
             <div class="containerFlexButton">
                 <div>
-                    <button class="btn btn-primary" type="submit" name="sendRequest">Consultar</button>
+                    <button id="btn-ask" class="btn btn-primary" type="button">Consultar</button>
                 </div>
             </div>
         </form>
@@ -91,5 +80,6 @@
         crossorigin="anonymous"></script>
     <!-- Bootstrap scripts End-->
 </body>
+<script src="../static/js/index.js"></script>
 
 </html>

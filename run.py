@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, jsonify
 import os
 from src.main import cleanCsv, agentAudit
 from flask_cors import CORS
@@ -12,9 +12,12 @@ def home():
 
 @app.route('/gpt', methods=['POST'])
 def agent():
-    question = request.form['questionModel']
-    print("AQUI ESTA LA PREGUNTA:" + question)
-    return agentAudit()
+    question = request.get_json()
+    gpt = agentAudit(question['question'])
+    answer = {'answer': gpt}
+    res = jsonify(answer)
+    res.status_code = 200
+    return res
 
 @app.route('/upload', methods=['POST'])
 def upload():
@@ -28,7 +31,7 @@ def upload():
         else:
             return render_template('error.html')
     cleanCsv()
-    return agentAudit()#render_template('prueba.html')
+    return render_template('ask.html')
     
 # @app.route('/xlsx', methods=['POST'])
 # def read_xlsx():
