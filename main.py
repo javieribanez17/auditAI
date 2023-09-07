@@ -38,39 +38,39 @@ import pandas as pd
 from langchain.agents import create_csv_agent
 #COMBINACION DE CSVs
 # ------------- CLEAR CUPS ----------------------------------------------------------------------------------------------------
-proced_df = pd.read_csv('c:/Users/LM521KP/OneDrive - EY/Documents/Demos y propuestas/AuditAI/ChatBotBack/CUPS.csv')
+proced_df = pd.read_csv('./CUPS.csv')
 def quitar_ceros_izquierda(valor):    
     return valor.lstrip('0')
 # Aplica la función a la columna
 proced_df['Codigo procedimiento'] = proced_df['Codigo procedimiento'].apply(quitar_ceros_izquierda)
-proced_df.to_csv('c:/Users/LM521KP/OneDrive - EY/Documents/Demos y propuestas/AuditAI/ChatBotBack/CUPS.csv', index=False)
+proced_df.to_csv('./CUPS.csv', index=False)
 # # -------------MERGE CUPS -----------------------------------------------------------------------------------------------------
 # Lee el segundo archivo CSV 1
-df1 = pd.read_csv('c:/Users/LM521KP/OneDrive - EY/Documents/Demos y propuestas/AuditAI/ChatBotBack/AP.csv', low_memory=False)
+df1 = pd.read_csv('./AP.csv', low_memory=False)
 df1['Codigo procedimiento'] = df1['Codigo procedimiento'].astype(str)
 # Lee el segundo archivo CSV 2
-df2 = pd.read_csv('c:/Users/LM521KP/OneDrive - EY/Documents/Demos y propuestas/AuditAI/ChatBotBack/CUPS.csv', low_memory=False)
+df2 = pd.read_csv('./CUPS.csv', low_memory=False)
 df2['Codigo procedimiento'] = df2['Codigo procedimiento'].astype(str)
 # Establece la columna en común como índice en ambos DataFrames
 resultado_df = pd.merge(df1, df2, on='Codigo procedimiento', how='left')
 # Guarda el resultado en un nuevo archivo CSV
-resultado_df.to_csv('c:/Users/LM521KP/OneDrive - EY/Documents/Demos y propuestas/AuditAI/ChatBotBack/RESULT.csv', index=False)
+resultado_df.to_csv('./RESULT.csv', index=False)
 # ------------- MERGE DE CIE10 ----------------------------------------------------------------------------------------------------
 # Lee el segundo archivo CSV 1
-df1 = pd.read_csv('c:/Users/LM521KP/OneDrive - EY/Documents/Demos y propuestas/AuditAI/ChatBotBack/RESULT.csv', low_memory=False)
+df1 = pd.read_csv('./RESULT.csv', low_memory=False)
 df1['DX Principal'] = df1['DX Principal'].astype(str)
 # Lee el segundo archivo CSV 2
-df2 = pd.read_csv('c:/Users/LM521KP/OneDrive - EY/Documents/Demos y propuestas/AuditAI/ChatBotBack/CIE10.csv', low_memory=False)
+df2 = pd.read_csv('./CIE10.csv', low_memory=False)
 df2['DX Principal'] = df2['DX Principal'].astype(str)
 # Establece la columna en común como índice en ambos DataFrames
 resultado_df = pd.merge(df1, df2, on='DX Principal', how='left')
 # Guarda el resultado en un nuevo archivo CSV
-resultado_df.to_csv('c:/Users/LM521KP/OneDrive - EY/Documents/Demos y propuestas/AuditAI/ChatBotBack/RESULT.csv', index=False)
+resultado_df.to_csv('./RESULT.csv', index=False)
 # ------------- CLEAR COLUMNS ----------------------------------------------------------------------------------------------------
-RESULT_DF = pd.read_csv('c:/Users/LM521KP/OneDrive - EY/Documents/Demos y propuestas/AuditAI/ChatBotBack/RESULT.csv', low_memory=False)
+RESULT_DF = pd.read_csv('./RESULT.csv', low_memory=False)
 columnas = ['Factura','Codigo prestador','Tipo de documento','Numero de documento','Fecha Procedimiento','# Autorizacion','Ambito Procedimiento','Finalidad','Personal que atiende','Complicacion','Forma de realizacion','Valor procedimiento','Prestador','Tarifa','Cups no encontrados en NT PGP BOG','Valores AP no encontrados en NT PGP BOG','RIPS vs facturacion','RIPS AP facturados no encontrados en facturacion','Llave Factura y CC','CUPS AP PGP vs NT Ministerio','Alerta CUPS AP PGP vs NT Ministerio','CUPS OK','Valor NT Ministerio','Alerta prestadores']
 RESULT_DF = RESULT_DF.drop(columnas, axis=1)
-RESULT_DF.to_csv('c:/Users/LM521KP/OneDrive - EY/Documents/Demos y propuestas/AuditAI/ChatBotBack/RESULT.csv', index=False)
+RESULT_DF.to_csv('./RESULT.csv', index=False)
 # ------------- CALL TO AGENT ----------------------------------------------------------------------------------------------------
 def agentAudit():    
     with get_openai_callback() as cb:
@@ -85,7 +85,7 @@ def agentAudit():
                 openai_api_type="azure",
                 temperature=0
             ),
-            ["c:/Users/LM521KP/OneDrive - EY/Documents/Demos y propuestas/AuditAI/ChatBotBack/RESULT.csv"],
+            ["./RESULT.csv"],
             verbose=True,
             agent_type=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
         )
