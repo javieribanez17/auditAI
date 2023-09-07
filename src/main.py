@@ -57,7 +57,8 @@ def cleanCsv():
     df2['DX Principal'] = df2['DX Principal'].astype(str)
     resultado_df = pd.merge(resultado_df, df2, on='DX Principal', how='left')
     # ------------- CLEAR COLUMNS ----------------------------------------------------------------------------------------------------
-    columnas = ['Factura','Codigo prestador','Tipo de documento','Numero de documento','Fecha Procedimiento','# Autorizacion','Ambito Procedimiento','Finalidad','Personal que atiende','Complicacion','Forma de realizacion','Valor procedimiento','Prestador','Tarifa','Cups no encontrados en NT PGP BOG','Valores AP no encontrados en NT PGP BOG','RIPS vs facturacion','RIPS AP facturados no encontrados en facturacion','Llave Factura y CC','CUPS AP PGP vs NT Ministerio','Alerta CUPS AP PGP vs NT Ministerio','CUPS OK','Valor NT Ministerio','Alerta prestadores']
+    #columnas = ['Factura','Codigo prestador','Tipo de documento','Numero de documento','Fecha Procedimiento','# Autorizacion','Ambito Procedimiento','Finalidad','Personal que atiende','Complicacion','Forma de realizacion','Valor procedimiento','Prestador','Tarifa','Cups no encontrados en NT PGP BOG','Valores AP no encontrados en NT PGP BOG','RIPS vs facturacion','RIPS AP facturados no encontrados en facturacion','Llave Factura y CC','CUPS AP PGP vs NT Ministerio','Alerta CUPS AP PGP vs NT Ministerio','CUPS OK','Valor NT Ministerio','Alerta prestadores']
+    columnas = ['Factura','Codigo prestador','Fecha Procedimiento','# Autorizacion','Ambito Procedimiento','Finalidad','Personal que atiende','Complicacion','Forma de realizacion','Valor procedimiento','Prestador','Tarifa','Cups no encontrados en NT PGP BOG','Valores AP no encontrados en NT PGP BOG','RIPS vs facturacion','RIPS AP facturados no encontrados en facturacion','Llave Factura y CC','CUPS AP PGP vs NT Ministerio','Alerta CUPS AP PGP vs NT Ministerio','CUPS OK','Valor NT Ministerio','Alerta prestadores']
     RESULT_DF = resultado_df.drop(columnas, axis=1)
     RESULT_DF.to_csv('./data/RESULT.csv', index=False)
 
@@ -81,5 +82,6 @@ def agentAudit(question):
         response = agent.run(question)
         print(cb)
         return response
+agentAudit()
 # ------------------------------------------------------------------------------------------------------------------------------------------
  
