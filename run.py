@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, render_template
 import os
 from src.main import agentAudit
 from flask_cors import CORS
@@ -8,7 +8,7 @@ CORS(app)
 
 @app.route('/', methods=['GET'])
 def home():
-    return "Hola mundo"
+    return render_template('home.html')
 
 @app.route('/gpt', methods=['GET'])
 def agent():
