@@ -17,7 +17,7 @@
     <!-- Barra de navegación Start -->
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/">Auditor<strong style="color: yellow;">IA</strong></a>
+            <a class="navbar-brand" href="/">Auditor<strong style="color: #ffe600;">IA</strong></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -109,18 +109,14 @@
     <div class="containerFiles">
         <form action="/load" method="post" enctype="multipart/form-data">
             <div class="form-group">
-                <h6 style="margin-top: 10px;">Por favor carga tu archivo de procedimientos (AP000000.csv)</h6>
                 <div class="input-group mb-3">
-                    <input type="file" class="form-control" name="loadFile" id="LoadFile" accept=".csv">
-                    <label class="input-group-text" for="LoadFile">Añadir</label>
+                    <input type="file" multiple="multiple" class="form-control form-control-lg" name="loadFile"
+                        id="LoadFile" accept=".csv" onchange="displaySelectedFiles()">
+                    <label class="input-group-text" for="LoadFile">Add</label>
                 </div>
             </div>
-            <div class="containerFlexButton">
-                <div>
-                    <button id="btn-upload" class="btn btn-primary" type="submit" name="sendFile"
-                        disabled>Cargar</button>
-                </div>
-            </div>
+            <p id="fileNames"></p>
+            <button id="btn-upload" class="btn btn-primary" type="submit" name="sendFile" disabled>Cargar</button>
         </form>
     </div>
     <!-- Carga del archivo End -->

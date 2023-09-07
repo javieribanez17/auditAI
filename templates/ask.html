@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Archivos de estilo Start -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <!-- Archivos de estilo End -->
+    <link rel="stylesheet" href="../static/css/aks.css">
+    <title>ask</title>
+</head>
+
+<body>
+    <!-- Barra de navegación Start -->
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">Auditor<strong style="color: #ffe600;">IA</strong></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Estados financieros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Regulación</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled">Conócenos</a>
+                    </li>
+                </ul>
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Búsqueda rápida" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Buscar</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <!-- Barra de navegación End-->
+    <div class="containerG">
+        <h1>Lorem ipsum dolor sit amet</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris rhoncus vulputate blandit. Aenean vel viverra
+            nunc, aliquam gravida diam. Aliquam volutpat imperdiet finibus. Nulla aliquam, nibh eu placerat pharetra,
+            neque nisi lobortis quam, eu interdum risus nibh a tellus. Maecenas non convallis ex. Mauris et libero vel
+            nibh hendrerit venenatis. Duis faucibus tempus sagittis. In non ultrices ex, in sollicitudin tellus. Sed
+            cursus condimentum tellus, id rutrum nunc consectetur vel. Praesent facilisis a magna porttitor euismod.
+        </p>
+        <form action="/" method="get">
+            <p>Análisis de los documentos <strong> <!-- <%= pdfTitle %> --> </strong>
+                <button style="color: red;" type="submit" class="close" aria-label="Close">
+                    <span aria-hidden="true"> &times;</span>
+                </button>
+            </p>
+        </form>
+        <form action="/ask" method="post">
+            <div class="form-group">
+                <!-- <% if (respondModel !="" ) { %>
+                    <label for="askModel">Respuesta del modelo GPT:</label>
+                    <textarea class="form-control" disabled="true" id="askModel"
+                        rows="10"><%= respondModel %></textarea>
+
+                    <% } %>
+                        <% if (consultPrev !="" ) { %>
+                            <p>Pregunta realizada: <i><strong>
+                                        <%= consultPrev %>
+                                    </strong></i></p>
+                            <% } %>
+                                <label for="questionModel">Escribe la pregunta que deseas realizar:</label>
+                                <textarea class="form-control" id="questionModel" name="questionModel"
+                                    rows="2"></textarea> -->
+                <label for="askModel">Respuesta del modelo GPT:</label>
+                <textarea class="form-control" disabled="true" id="askModel" rows="10">
+
+                <label for="questionModel">Escribe la pregunta que deseas realizar:</label>
+                <textarea class="form-control" id="questionModel" name="questionModel" rows="2"></textarea>
+            </div>
+            <div class="containerFlexButton">
+                <div>
+                    <button class="btn btn-primary" type="submit" name="sendRequest">Consultar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- Bootstrap scripts Start-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+    <!-- Bootstrap scripts End-->
+</body>
+
+</html>
