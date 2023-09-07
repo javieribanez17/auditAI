@@ -52,19 +52,27 @@
             nibh hendrerit venenatis. Duis faucibus tempus sagittis. In non ultrices ex, in sollicitudin tellus. Sed
             cursus condimentum tellus, id rutrum nunc consectetur vel. Praesent facilisis a magna porttitor euismod.
         </p>
-        <form action="/" method="get">
-            <p>Análisis de los documentos <strong> <!-- <%= pdfTitle %> --> </strong>
-                <button style="color: red;" type="submit" class="close" aria-label="Close">
-                    <span aria-hidden="true"> &times;</span>
-                </button>
-            </p>
-        </form>
-        <form>
-            <div class="form-group">
-                <label for="askModel">Respuesta del modelo GPT:</label>
+        <h5>Archivos seleccionados:</h5>
+        <ul>
+            {% for nombre in nombres %}
+                <li>{{ nombre }}</li>
+            {% endfor %}
+        </ul>
+        
+            <div>
+                <div id="test">
+                    <h5 for="askModel">Respuesta del modelo GPT:</h5>
+                    <form action="/" method="get">
+                        <button type="submit" class="btn btn-outline-secondary consult close" aria-label="Close">
+                            Borrar archivos
+                        </button>
+                    </form>
+                </div>
+                
                 <textarea class="form-control" disabled="true" id="askModel" rows="10"></textarea>
-
-                <label for="questionModel">Escribe la pregunta que deseas realizar:</label>
+                <h5 id="pre-question"></h5>
+                <h5 for="questionModel">Escribe la pregunta que deseas realizar:</h5>
+                
                 <textarea class="form-control" id="questionModel" rows="2"></textarea>
             </div>
             <div class="containerFlexButton">
@@ -72,7 +80,6 @@
                     <button id="btn-ask" class="btn btn-primary" type="button">Consultar</button>
                 </div>
             </div>
-        </form>
     </div>
     <!-- Bootstrap scripts Start-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"

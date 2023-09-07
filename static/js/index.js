@@ -6,6 +6,7 @@ boton.addEventListener("click", async function() {
     const gpt = {
         question: question.value
     };
+    document.getElementById("questionModel").textContent = "";
     await fetch("http://localhost:5000/gpt", {
         method: "POST",
         headers: {
@@ -15,8 +16,17 @@ boton.addEventListener("click", async function() {
     })
     .then(response => response.json())
     .then(data => {
-        document.getElementById("askModel").textContent =data.answer
+        document.getElementById("askModel").textContent = data.answer
     })
     .catch(error => console.log(error));
+    var pre_q = document.getElementById("pre-question");
+    pre_q.textContent = "Pregunta previa: " + question.value
+    question.value = "";
     container.style.display = "none";
+    pre_q.style.display = "block";
 });
+
+var deleteFiles = document.getElementById("delete-files");
+deleteFiles.addEventListener("click", function() {
+    fetch("http://localhost:5000/home")
+})
