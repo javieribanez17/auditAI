@@ -28,6 +28,9 @@ def upload():
         if 'AP' in name:
             file_path = './data/AP.csv'
             file.save(file_path)
+        elif 'US' in name:
+            file_path = './data/US.csv'
+            file.save(file_path)
         else:
             return render_template('error.html')
     cleanCsv()

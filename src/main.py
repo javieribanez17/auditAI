@@ -46,19 +46,25 @@ from langchain.agents import create_csv_agent
 # # -------------MERGE CUPS -----------------------------------------------------------------------------------------------------
 
 def cleanCsv():
+        # ------------- MERGE DE CUPS ----------------------------------------------------------------------------------------------------
     df1 = pd.read_csv('./data/AP.csv', low_memory=False)
     df1['Codigo procedimiento'] = df1['Codigo procedimiento'].astype(str)
     df2 = pd.read_csv('./data/CUPS.csv', low_memory=False)
     df2['Codigo procedimiento'] = df2['Codigo procedimiento'].astype(str)
     resultado_df = pd.merge(df1, df2, on='Codigo procedimiento', how='left')
+    # ------------- MERGE DE USUARIOS ------------------------------------------------------------------------------------------------
+    resultado_df['Numero de documento'] = resultado_df['Numero de documento'].astype(str)
+    df3 = pd.read_csv('./data/US.csv', low_memory=False)
+    df3['Numero de documento'] = df3['Numero de documento'].astype(str)
+    resultado_df = pd.merge(resultado_df, df3, on='Numero de documento', how='left')
     # ------------- MERGE DE CIE10 ----------------------------------------------------------------------------------------------------
     resultado_df['DX Principal'] = resultado_df['DX Principal'].astype(str)
-    df2 = pd.read_csv('./data/CIE10.csv', low_memory=False)
-    df2['DX Principal'] = df2['DX Principal'].astype(str)
-    resultado_df = pd.merge(resultado_df, df2, on='DX Principal', how='left')
+    df3 = pd.read_csv('./data/CIE10.csv', low_memory=False)
+    df3['DX Principal'] = df3['DX Principal'].astype(str)
+    resultado_df = pd.merge(resultado_df, df3, on='DX Principal', how='left')
     # ------------- CLEAR COLUMNS ----------------------------------------------------------------------------------------------------
     #columnas = ['Factura','Codigo prestador','Tipo de documento','Numero de documento','Fecha Procedimiento','# Autorizacion','Ambito Procedimiento','Finalidad','Personal que atiende','Complicacion','Forma de realizacion','Valor procedimiento','Prestador','Tarifa','Cups no encontrados en NT PGP BOG','Valores AP no encontrados en NT PGP BOG','RIPS vs facturacion','RIPS AP facturados no encontrados en facturacion','Llave Factura y CC','CUPS AP PGP vs NT Ministerio','Alerta CUPS AP PGP vs NT Ministerio','CUPS OK','Valor NT Ministerio','Alerta prestadores']
-    columnas = ['Factura','Codigo prestador','Fecha Procedimiento','# Autorizacion','Ambito Procedimiento','Finalidad','Personal que atiende','Complicacion','Forma de realizacion','Valor procedimiento','Prestador','Tarifa','Cups no encontrados en NT PGP BOG','Valores AP no encontrados en NT PGP BOG','RIPS vs facturacion','RIPS AP facturados no encontrados en facturacion','Llave Factura y CC','CUPS AP PGP vs NT Ministerio','Alerta CUPS AP PGP vs NT Ministerio','CUPS OK','Valor NT Ministerio','Alerta prestadores']
+    columnas = ['Factura','Codigo prestador','DX Relacionado','Tipo de doc','Codigo entidad','Tipo de usuario','Apellido 2','Nombre 2','Unidad de medida','Departamento','Municipio','Zona','Fecha Procedimiento','# Autorizacion','Ambito Procedimiento','Finalidad','Personal que atiende','Complicacion','Forma de realizacion','Valor procedimiento','Prestador','Tarifa','Cups no encontrados en NT PGP BOG','Valores AP no encontrados en NT PGP BOG','RIPS vs facturacion','RIPS AP facturados no encontrados en facturacion','Llave Factura y CC','CUPS AP PGP vs NT Ministerio','Alerta CUPS AP PGP vs NT Ministerio','CUPS OK','Valor NT Ministerio','Alerta prestadores']
     RESULT_DF = resultado_df.drop(columnas, axis=1)
     RESULT_DF.to_csv('./data/RESULT.csv', index=False)
 
@@ -79,9 +85,8 @@ def agentAudit(question):
             verbose=True,
             agent_type=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
         )
-        response = agent.run(question)
+        response = agent.run("Dime el número de identificación los usuarios mascúlinos que tienen un procedimiento apto solamente para sexo femenino")
         print(cb)
         return response
-agentAudit()
 # ------------------------------------------------------------------------------------------------------------------------------------------
  
