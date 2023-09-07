@@ -1,6 +1,6 @@
 from flask import Flask, request
 import os
-from main import agentAudit
+from src.main import agentAudit
 from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
@@ -14,20 +14,18 @@ def home():
 def agent():
     return agentAudit()
 
-# @app.route('/upload', methods=['POST'])
-# def upload():
-#     if(len(os.listdir("./data")) == 1):
-#         deleteFile()
-#     global file_path
-#     file = request.files['file']
-#     extension = file.filename.split(".")[-1]
-#     if extension in extensions:
-#         file_path = './data/data.' + extension
-#         file.save(file_path)
-#         return "", 201
-#     else:
-#         raise Exception("Archivo no valido")
-
+@app.route('/upload', methods=['POST'])
+def upload():
+    files = request.files.getlist('archivos')
+    for file in files:
+        extension = file.filename.split(".")[-1]
+        if extension == "csv":
+            file_path = './data/data.' + file.filename
+            file.save(file_path)
+        else:
+            raise Exception("Archivo no valido")
+    return "", 201
+    
 # @app.route('/xlsx', methods=['POST'])
 # def read_xlsx():
 #     question = request.get_json()
