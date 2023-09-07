@@ -45,3 +45,12 @@
     transform: translate(-50%, -50%) rotate(360deg);
   }
 }
+
+#pre-question{
+  display: none;
+}
+
+#test{
+  display: flex;
+  justify-content:space-between;
+}
