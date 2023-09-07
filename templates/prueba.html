@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Subir Archivos</title>
+</head>
+<body>
+    <form action="/gpt" method="post">
+        <div class="form-group">
+            <label for="askModel">Respuesta del modelo GPT:</label>
+            <textarea class="form-control" disabled="true" id="askModel" rows="10"></textarea>
+                <p>Pregunta realizada: <i><strong></strong></i></p>
+                <label for="questionModel">Escribe la pregunta que deseas realizar:</label>
+                <textarea class="form-control" id="questionModel" name="questionModel" rows="2"></textarea>
+        </div>
+        <div class="containerFlexButton">
+            <div>
+                <button class="btn btn-primary" type="submit" name="sendRequest">Enviar</button>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

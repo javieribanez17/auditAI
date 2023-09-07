@@ -1,6 +1,6 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect
 import os
-from src.main import agentAudit
+from src.main import cleanCsv, agentAudit
 from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
@@ -10,21 +10,25 @@ CORS(app)
 def home():
     return render_template('home.html')
 
-@app.route('/gpt', methods=['GET'])
+@app.route('/gpt', methods=['POST'])
 def agent():
+    question = request.form['questionModel']
+    print("AQUI ESTA LA PREGUNTA:" + question)
     return agentAudit()
 
 @app.route('/upload', methods=['POST'])
 def upload():
-    files = request.files.getlist('archivos')
+    files = request.files.getlist('loadFile')
     for file in files:
         extension = file.filename.split(".")[-1]
-        if extension == "csv":
-            file_path = './data/data.' + file.filename
+        name = file.filename.split(".")[0] 
+        if 'AP' in name:
+            file_path = './data/AP.csv'
             file.save(file_path)
         else:
-            raise Exception("Archivo no valido")
-    return "", 201
+            return render_template('error.html')
+    cleanCsv()
+    return render_template('prueba.html')
     
 # @app.route('/xlsx', methods=['POST'])
 # def read_xlsx():
