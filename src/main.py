@@ -46,48 +46,36 @@ from langchain.agents import create_csv_agent
 # # -------------MERGE CUPS -----------------------------------------------------------------------------------------------------
 
 def cleanCsv():
-        # ------------- MERGE DE CUPS ----------------------------------------------------------------------------------------------------
-    # df1 = pd.read_csv('./data/AP.csv', low_memory=False)
-    # df1['Codigo procedimiento'] = df1['Codigo procedimiento'].astype(str)
-    # df2 = pd.read_csv('./data/CUPS.csv', low_memory=False)
-    # df2['Codigo procedimiento'] = df2['Codigo procedimiento'].astype(str)
-    # resultado_df = pd.merge(df1, df2, on='Codigo procedimiento', how='left')
-    # # ------------- MERGE DE USUARIOS ------------------------------------------------------------------------------------------------
-    # resultado_df['Numero de documento'] = resultado_df['Numero de documento'].astype(str)
-    # df3 = pd.read_csv('./data/US.csv', low_memory=False)
-    # df3['Numero de documento'] = df3['Numero de documento'].astype(str)
-    # resultado_df = pd.merge(resultado_df, df3, on='Numero de documento', how='left')
-    # # ------------- MERGE DE CIE10 ----------------------------------------------------------------------------------------------------
-    # resultado_df['DX Principal'] = resultado_df['DX Principal'].astype(str)
-    # df3 = pd.read_csv('./data/CIE10.csv', low_memory=False)
-    # df3['DX Principal'] = df3['DX Principal'].astype(str)
-    # resultado_df = pd.merge(resultado_df, df3, on='DX Principal', how='left')
-    # # ------------- CLEAR COLUMNS ------------------------- --------------------------------------------------------------------------
-    # #columnas = ['Factura','Codigo prestador','Tipo de documento','Numero de documento','Fecha Procedimiento','# Autorizacion','Ambito Procedimiento','Finalidad','Personal que atiende','Complicacion','Forma de realizacion','Valor procedimiento','Prestador','Tarifa','Cups no encontrados en NT PGP BOG','Valores AP no encontrados en NT PGP BOG','RIPS vs facturacion','RIPS AP facturados no encontrados en facturacion','Llave Factura y CC','CUPS AP PGP vs NT Ministerio','Alerta CUPS AP PGP vs NT Ministerio','CUPS OK','Valor NT Ministerio','Alerta prestadores']
-    # columnas = ['Factura','Codigo prestador','DX Relacionado','Tipo de doc','Codigo entidad','Tipo de usuario','Apellido 2','Nombre 2','Unidad de medida','Departamento','Municipio','Zona','Fecha Procedimiento','# Autorizacion','Ambito Procedimiento','Finalidad','Personal que atiende','Complicacion','Forma de realizacion','Valor procedimiento','Prestador','Cups no encontrados en NT PGP BOG','Valores AP no encontrados en NT PGP BOG','RIPS vs facturacion','RIPS AP facturados no encontrados en facturacion','Llave Factura y CC','CUPS AP PGP vs NT Ministerio','Alerta CUPS AP PGP vs NT Ministerio','CUPS OK','Valor NT Ministerio','Alerta prestadores']
-    # RESULT_DF = resultado_df.drop(columnas, axis=1)
-    # RESULT_DF.to_csv('./data/RESULT.csv', index=False)
-    
-    #Transformar txt a csv
+    # ------------- MERGE DE AP y US ----------------------------------------------------------------------------------------------------
+    df1 = pd.read_csv('./data/US.csv', low_memory=False)
+    df1['Numero de identificacion'] = df1['Numero de identificacion'].astype(str)
+    df2 = pd.read_csv('./data/AP.csv', low_memory=False)
+    df2['Numero de identificacion'] = df2['Numero de identificacion'].astype(str)
+    resultado_df = pd.merge(df1, df2, on='Numero de identificacion', how='left')
+    columnas = ['Tipo de doc','Codigo entidad','Tipo de usuario','Apellido 2','Nombre 2','Edad','Unidad de medida','Departamento','Municipio','Zona','Factura','Codigo prestador','Tipo de documento','Fecha Procedimiento','# Autorizacion','Ambito Procedimiento','Finalidad','Personal que atiende','DX Relacionado','Complicacion','Forma de realizacion','Valor procedimiento']
+    # ------------- MERGE DE CUPS ----------------------------------------------------------------------------------------------------
+    resultado_df['Codigo del procedimiento'] = resultado_df['Codigo del procedimiento'].astype(str)
+    df2 = pd.read_csv('./data/CUPS.csv', low_memory=False)
+    df2['Codigo del procedimiento'] = df2['Codigo del procedimiento'].astype(str)
+    resultado_df = pd.merge(resultado_df, df2, on='Codigo del procedimiento', how='left')
+    # ------------- MERGE DE CIE10 ----------------------------------------------------------------------------------------------------
+    resultado_df['Codigo del diagnostico'] = resultado_df['Codigo del diagnostico'].astype(str)
+    df2 = pd.read_csv('./data/CIE10.csv', low_memory=False)
+    df2['Codigo del diagnostico'] = df2['Codigo del diagnostico'].astype(str)
+    resultado_df = pd.merge(resultado_df, df2, on='Codigo del diagnostico', how='left')
+    # ------------- MERGE DE Tarifarios ----------------------------------------------------------------------------------------------------
+    resultado_df['Codigo del procedimiento'] = resultado_df['Codigo del procedimiento'].astype(str)
+    df2 = pd.read_csv('./data/TarifarioContrato.csv', low_memory=False)
+    df2['Codigo del procedimiento'] = df2['Codigo del procedimiento'].astype(str)
+    resultado_df = pd.merge(resultado_df, df2, on='Codigo del procedimiento', how='left')
+    resultado_df['Codigo del procedimiento'] = resultado_df['Codigo del procedimiento'].astype(str)
+    df2 = pd.read_csv('./data/TarifarioMinisterio.csv', low_memory=False)
+    df2['Codigo del procedimiento'] = df2['Codigo del procedimiento'].astype(str)
+    resultado_df = pd.merge(resultado_df, df2, on='Codigo del procedimiento', how='left')
+    # ------------- CLEAR COLUMNS ----------------------------------------------------------------------------------------------------
+    RESULT_DF = resultado_df.drop(columnas, axis=1)
+    RESULT_DF.to_csv('./data/RESULT.csv', index=False)
 
-    # Agregar columnas a CIE10
-    df = pd.read_csv('./data/CIE10.csv', low_memory=False)
-    df.columns = ['Codigo del diagnostico', 'Nombre del diagnostico']
-    df.to_csv('./data/CIE10.csv', index=False)
-    # Agregar columnas a CUPS
-    df = pd.read_csv('./data/CUPS.csv', low_memory=False)
-    df.columns = ['Codigo del procedimiento', 'Nombre del procedimiento', 'Sexo admitido']
-    df.to_csv('./data/CUPS.csv', index=False)
-    # Agregar columnas a AP
-    df = pd.read_csv('./data/AP.csv', low_memory=False)
-    df.columns = ['Factura','Codigo prestador','Tipo de documento','Numero de identificacion','Fecha Procedimiento','# Autorizacion','Codigo del procedimiento','Ambito Procedimiento','Finalidad','Personal que atiende','Codigo del procedimiento','DX Relacionado','Complicacion','Forma de realizacion','Valor procedimiento']
-    df.to_csv('./data/AP.csv', index=False)
-    # Agregar columnas a AC
-    df = pd.read_csv('./data/US.csv', low_memory=False)
-    df.columns = ['Tipo de doc','Numero de identificacion','Codigo entidad','Tipo de usuario','Apelido','Apellido 2','Nombre','Nombre 2','Edad','Unidad de medida','Sexo del usuario','Departamento','Municipio','Zona']
-    df.to_csv('./data/US.csv', index=False)
-
-cleanCsv()
 # ------------- CALL TO AGENT ----------------------------------------------------------------------------------------------------
 def agentAudit(question):    
     with get_openai_callback() as cb:
@@ -108,5 +96,5 @@ def agentAudit(question):
         response = agent.run(question)
         print(cb)
         return response
+# agentAudit()
 # ------------------------------------------------------------------------------------------------------------------------------------------
- 

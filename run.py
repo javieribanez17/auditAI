@@ -37,6 +37,9 @@ def upload():
         elif 'US' in name:
             file_path = './data/US.csv'
             file.save(file_path)
+        elif 'CIE' or 'CUPS' or 'Tarifario' in name:
+            file_path = './data/' + file.filename
+            file.save(file_path)
         else:
             return render_template('error.html')
     cleanCsv()
