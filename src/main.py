@@ -88,7 +88,7 @@ def cleanCsv():
     df2 = pd.read_csv('./data/TarifarioMinisterio.csv', low_memory=False)
     df2['Codigo del procedimiento'] = df2['Codigo del procedimiento'].astype(str)
     resultado_df = pd.merge(resultado_df, df2, on='Codigo del procedimiento', how='left')
-    # ------------- CLEAR COLUMNS ----------------------------------------------------------------------------------------------------
+    # # ------------- CLEAR COLUMNS ----------------------------------------------------------------------------------------------------
     RESULT_DF = resultado_df.drop(columnas, axis=1)
     RESULT_DF.to_csv('./data/RESULT.csv', index=False)
 # ------------- CALL TO AGENT ----------------------------------------------------------------------------------------------------
