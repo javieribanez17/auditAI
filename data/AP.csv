@@ -1,6 +1,6 @@
-Factura,Codigo prestador,Tipo de documento,Numero de identificacion,Fecha Procedimiento,# Autorizacion,Codigo del procedimiento,Ambito Procedimiento,Finalidad,Personal que atiende,Codigo del diagnostico,DX Relacionado,Complicacion,Forma de realizacion,Valor procedimiento
-SD2510317118,110010559713,CC,1000001242,20/10/2022,13224138,892908,1,1,5,C601,,,,0
-SD2510317118,110010559732,CC,1000009889,20/10/2022,13070467,907201,1,1,5,N422,,,,0
-SD2510317118,110010559712,CC,1000005467,19/10/2022,13303589,651201,1,1,5,N801,,,,0
-SD2510317118,110010559701,CC,1000007213,19/10/2022,13064894,584101,1,1,5,N211,,,,0
-SD2510317118,110010559713,CC,1000003675,18/10/2022,13410406,584101,1,1,5,N211,,,,0
+Factura,Codigo prestador,Tipo de documento,Numero de documento,Fecha Procedimiento,# Autorizacion,Codigo procedimiento,Ambito Procedimiento,Finalidad,Personal que atiende,DX Principal,DX Relacionado,Complicacion,Forma de realizacion,Valor procedimiento,Prestador,Tarifa,Cups no encontrados en NT PGP BOG,Valores AP no encontrados en NT PGP BOG,RIPS vs facturacion,RIPS AP facturados no encontrados en facturacion,Llave Factura y CC,CUPS AP PGP vs NT Ministerio,Alerta CUPS AP PGP vs NT Ministerio,CUPS OK,Valor NT Ministerio,Alerta prestadores
+SD2510317118,110010559713,CC,1000000387,martes - 15 de noviembre de 2022,13224135,906610,1,1,5,I10X,,,,0,1100105597,17052,OK,OK,,Alerta,SD2510317118/10225105,111111123,OK,903426,23399,OK
+SD2510317118,110010559732,CC,1000000401,martes - 1 de noviembre de 2022,13070460,487901,1,1,5,I10X,,,,0,1100105597,34743,OK,OK,,Alerta,SD2510317118/1067844818,895100,OK,895100,24688,OK
+SD2510317118,110010559712,CC,1000000466,lunes - 21 de noviembre de 2022,13303588,578303,1,1,5,A028,,,,0,1100105597,17052,OK,OK,,Alerta,SD2510317118/27082323,904902,OK,904902,34297,OK
+SD2510317118,110010559701,CC,1000000538,martes - 1 de noviembre de 2022,13064890,584101,1,1,5,I10X,,,,0,1100105597,43620,OK,OK,,Alerta,SD2510317118/51891582,881332,OK,881332,44422,OK
+SD2510317118,110010559713,CC,1000000401,miercoles - 30 de noviembre de 2022,13410404,584101,1,1,5,I10X,,,,0,1100105597,17052,OK,OK,,Alerta,SD2510317118/19394738,906610,OK,906610,55281,OK
