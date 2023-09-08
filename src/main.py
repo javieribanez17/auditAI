@@ -56,7 +56,7 @@ def cleanCsv():
     df.to_csv('./data/AP.csv', index=False)
     # Agregar columnas a AC
     df = pd.read_csv('./data/US.csv', low_memory=False, header=None)
-    df.columns = ['Tipo de doc','Numero de identificacion','Codigo entidad','Tipo de usuario','Apelido','Apellido 2','Nombre','Nombre 2','Edad','Unidad de medida','Sexo del usuario','Departamento','Municipio','Zona']
+    df.columns = ['Tipo de doc','Numero de identificacion','Codigo entidad','Tipo de usuario','Apellido','Apellido 2','Nombre','Nombre 2','Edad','Unidad de medida','Sexo del usuario','Departamento','Municipio','Zona']
     df.to_csv('./data/US.csv', index=False)
     # ------------- CLEAR CUPS ----------------------------------------------------------------------------------------------------
     # proced_df = pd.read_csv('./data/CUPS.csv', header=None)
@@ -96,7 +96,7 @@ def agentAudit(question):
     with get_openai_callback() as cb:
         load_dotenv()
         agent = create_csv_agent(
-            AzureOpenAI(openai_api_base="https://alph4num3r1c.openai.azure.com/",
+            AzureOpenAI(openai_api_base=os.environ["openai_api_base"],
                 openai_api_version="2023-05-15",
                 deployment_name="TestDavinci003",
                 model="text-davinci-003",

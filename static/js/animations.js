@@ -4,7 +4,7 @@ if (document.getElementById("btn-upload")) {
   const uploadFile = document.getElementById("LoadFile");
   uploadFile.addEventListener("change", () => {
     btnFile.disabled =
-      uploadFile.files.length === 0 || uploadFile.files.length > 7;
+      uploadFile.files.length === 0 || uploadFile.files.length < 6;
   });
   btnFile.addEventListener("click", function () {
     var container = document.getElementById("loaderContainer");
@@ -30,14 +30,10 @@ function displaySelectedFiles() {
   }
 }
 
-if(document.getElementById("btn-ask")){
+if (document.getElementById("btn-ask")) {
   const textarea = document.getElementById("questionModel");
   const btnAsk = document.getElementById("btn-ask");
-  textarea.addEventListener("input", function () {
-    if (textarea.value.trim() === "") {
-        btnAsk.disabled = true;
-    } else {
-        btnAsk.disabled = false;
-    }
-});
+  textarea.addEventListener("input", () => {
+    btnAsk.disabled = textarea.value.length === 0;
+  });
 }

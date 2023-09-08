@@ -44,37 +44,3 @@ def upload():
             return render_template('error.html')
     cleanCsv()
     return render_template('ask.html', nombres=nombres)
-    
-# @app.route('/xlsx', methods=['POST'])
-# def read_xlsx():
-#     question = request.get_json()
-#     answer = xlsx(file_path, question['content'])
-#     return answer
-
-# @app.route('/pdf', methods=['POST'])
-# def read_pdf():
-#     question = request.get_json()
-#     answer = pdfs(file_path, question['content'])
-#     return answer
-
-
-# @app.route('/', methods=['DELETE'])
-# def deleteFile():
-#     global file_path
-#     try:
-#         os.remove(file_path)
-#     except Exception as e:
-#         print(e)
-#     return '', 204
-
-# @app.route('/connect', methods=['POST'])
-# def read_db():
-#     datos_formulario = request.get_json()
-#     conect_db(datos_formulario)
-#     return "", 201
-
-# @app.route('/db', methods=['POST'])
-# def ask_db():
-#     question = request.get_json()
-#     answer = db(question['content'])
-#     return answer
