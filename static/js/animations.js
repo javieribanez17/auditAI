@@ -29,3 +29,15 @@ function displaySelectedFiles() {
     fileNamesElement.innerHTML = "Selecciona máximo 6 archivos";
   }
 }
+
+if(document.getElementById("btn-ask")){
+  const textarea = document.getElementById("questionModel");
+  const btnAsk = document.getElementById("btn-ask");
+  textarea.addEventListener("input", function () {
+    if (textarea.value.trim() === "") {
+        btnAsk.disabled = true;
+    } else {
+        btnAsk.disabled = false;
+    }
+});
+}

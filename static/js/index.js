@@ -25,8 +25,3 @@ boton.addEventListener("click", async function() {
     container.style.display = "none";
     pre_q.style.display = "block";
 });
-
-var deleteFiles = document.getElementById("delete-files");
-deleteFiles.addEventListener("click", function() {
-    fetch("http://localhost:5000/home")
-})
