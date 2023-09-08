@@ -16,8 +16,8 @@ def home():
 @app.route('/gpt', methods=['POST'])
 def agent():
     question = request.get_json()
-    gpt = question['question']
-    # gpt = agentAudit(question['question'])
+    # gpt = question['question']
+    gpt = agentAudit(question['question'])
     answer = {'answer': gpt}
     res = jsonify(answer)
     res.status_code = 200
