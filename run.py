@@ -16,8 +16,8 @@ def home():
 @app.route('/gpt', methods=['POST'])
 def agent():
     question = request.get_json()
-    gpt = question['question']
-    # gpt = agentAudit(question['question'])
+    # gpt = question['question']
+    gpt = agentAudit(question['question'])
     answer = {'answer': gpt}
     res = jsonify(answer)
     res.status_code = 200
@@ -33,6 +33,12 @@ def upload():
         name = file.filename.split(".")[0] 
         if 'AP' in name:
             file_path = './data/AP.csv'
+            file.save(file_path)
+        elif 'US' in name:
+            file_path = './data/US.csv'
+            file.save(file_path)
+        elif 'CIE' or 'CUPS' or 'Tarifario' in name:
+            file_path = './data/' + file.filename
             file.save(file_path)
         else:
             return render_template('error.html')
