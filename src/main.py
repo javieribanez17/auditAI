@@ -36,16 +36,32 @@ import pandas as pd
 from langchain.agents import create_csv_agent
 
 #COMBINACION DE CSVs
-# ------------- CLEAR CUPS ----------------------------------------------------------------------------------------------------
-# proced_df = pd.read_csv('./data/CUPS.csv')
-# def quitar_ceros_izquierda(valor):    
-#     return valor.lstrip('0')
-# # Aplica la función a la columna
-# proced_df['Codigo procedimiento'] = proced_df['Codigo procedimiento'].apply(quitar_ceros_izquierda)
-# proced_df.to_csv('./CUPS.csv', index=False)
-# # -------------MERGE CUPS -----------------------------------------------------------------------------------------------------
+# ------------- QUITAR CEROS A CUPS ----------------------------------------------------------------------------------------------------
 
 def cleanCsv():
+    # def quitar_ceros_izquierda(valor):    
+    #     return valor.lstrip('0')
+    # ------------- AGREGAR COLUMNAS A LOS ARCHIVOS ----------------------------------------------------------------------------------------------------
+    # Agregar columnas a CIE10
+    df = pd.read_csv('./data/CIE10.csv', low_memory=False, header=None)
+    df.columns = ['Codigo del diagnostico', 'Nombre del diagnostico','Sexo del diagnostico']
+    df.to_csv('./data/CIE10.csv', index=False)
+    # Agregar columnas a CUPS
+    df = pd.read_csv('./data/CUPS.csv', low_memory=False, header=None)
+    df.columns = ['Codigo del procedimiento', 'Nombre del procedimiento', 'Sexo del procedimiento']
+    df.to_csv('./data/CUPS.csv', index=False)
+    # Agregar columnas a AP
+    df = pd.read_csv('./data/AP.csv', low_memory=False, header=None)
+    df.columns = ['Factura','Codigo prestador','Tipo de documento','Numero de identificacion','Fecha Procedimiento','# Autorizacion','Codigo del procedimiento','Ambito Procedimiento','Finalidad','Personal que atiende','Codigo del diagnostico','DX Relacionado','Complicacion','Forma de realizacion','Valor procedimiento']
+    df.to_csv('./data/AP.csv', index=False)
+    # Agregar columnas a AC
+    df = pd.read_csv('./data/US.csv', low_memory=False, header=None)
+    df.columns = ['Tipo de doc','Numero de identificacion','Codigo entidad','Tipo de usuario','Apelido','Apellido 2','Nombre','Nombre 2','Edad','Unidad de medida','Sexo del usuario','Departamento','Municipio','Zona']
+    df.to_csv('./data/US.csv', index=False)
+    # ------------- CLEAR CUPS ----------------------------------------------------------------------------------------------------
+    # proced_df = pd.read_csv('./data/CUPS.csv', header=None)
+    # proced_df['Codigo del procedimiento'] = proced_df['Codigo del procedimiento'].apply(quitar_ceros_izquierda)
+    # proced_df.to_csv('./CUPS.csv', index=False)
     # ------------- MERGE DE AP y US ----------------------------------------------------------------------------------------------------
     df1 = pd.read_csv('./data/US.csv', low_memory=False)
     df1['Numero de identificacion'] = df1['Numero de identificacion'].astype(str)
@@ -75,7 +91,6 @@ def cleanCsv():
     # ------------- CLEAR COLUMNS ----------------------------------------------------------------------------------------------------
     RESULT_DF = resultado_df.drop(columnas, axis=1)
     RESULT_DF.to_csv('./data/RESULT.csv', index=False)
-
 # ------------- CALL TO AGENT ----------------------------------------------------------------------------------------------------
 def agentAudit(question):    
     with get_openai_callback() as cb:
