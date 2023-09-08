@@ -7,7 +7,7 @@ boton.addEventListener("click", async function () {
     question: question.value,
   };
   document.getElementById("questionModel").textContent = "";
-  await fetch("http://localhost:5000/gpt", {
+  await fetch("https://gptaudit.azurewebsites.net/gpt", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
