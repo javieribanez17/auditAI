@@ -8,3 +8,13 @@
   color: white;
   background-image: linear-gradient(#333333, #ffe600);
 }
+
+#fileNames {
+  max-width: 100%;
+  word-wrap: break-word;
+  margin: 5px 0px;
+}
+
+#upload-form {
+  width: 30vw;
+}

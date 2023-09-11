@@ -10,8 +10,8 @@
 }
 .btn-primary {
   margin-top: 10px;
+  margin-bottom: 20px;
 }
-
 
 #loaderContainer {
   display: none;
@@ -46,11 +46,7 @@
   }
 }
 
-#pre-question{
-  display: none;
-}
-
-#test{
+#test {
   display: flex;
-  justify-content:space-between;
+  justify-content: space-between;
 }
