@@ -65,3 +65,7 @@ p {
   background-color: gray;
   border-color: #ffe600;
 }
+
+#div-btn {
+  margin-bottom: 5%;
+}

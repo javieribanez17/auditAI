@@ -29,16 +29,15 @@
                         <a class="nav-link active" aria-current="page" href="#">Estados financieros</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">Regulación</a>
+                        <a class="nav-link" href="#">Regulación</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">Conócenos</a>
+                        <a class="nav-link disabled">Conócenos</a>
                     </li>
                 </ul>
                 <form class="d-flex" role="search">
                     <input class="form-control me-2" type="search" placeholder="Búsqueda rápida" aria-label="Search">
-                    <button class="btn btn-outline-success" style="color: #ffe600; border-color: #ffe600;"
-                        type="submit">Buscar</button>
+                    <button class="btn btn-outline-success" type="submit">Buscar</button>
                 </form>
             </div>
         </div>
@@ -57,9 +56,9 @@
         </div>
         <div class="carousel-inner">
             <div class="carousel-item">
-                <img class="img-carrusel" src="../static/images/health.png" alt="Banner health">
+                <img width="100%" height="100%" src="../static/images/health.png" alt="Banner health">
                 <div class="container">
-                    <div class="carousel-caption text-start div-text">
+                    <div class="carousel-caption text-start">
                         <h1 style="color: white;"><strong>Comprometidos con tu salud</strong></h1>
                         <p style="color: white;"><strong>
                                 Tú salud es lo más importante para nosotros y es por eso
@@ -70,9 +69,9 @@
                 </div>
             </div>
             <div class="carousel-item">
-                <img class="img-carrusel" src="../static/images/bot.png" alt="Banner IA">
+                <img width="100%" height="100%" src="../static/images/bot.png" alt="Banner IA">
                 <div class="container">
-                    <div class="carousel-caption text-start div-text">
+                    <div class="carousel-caption">
                         <h1 style="color: white;">Impulsados por la tecnología</h1>
                         <p style="color: white;"><strong>Ponemos a disposición las herramientas de inteligencia
                                 artificial
@@ -83,9 +82,9 @@
                 </div>
             </div>
             <div class="carousel-item active">
-                <img class="img-carrusel" src="../static/images/job.png" alt="User 1">
+                <img width="100%" height="100%" src="../static/images/job.png" alt="User 1">
                 <div class="container">
-                    <div class="carousel-caption text-start div-text">
+                    <div class="carousel-caption text-end">
                         <h1 style="color: white;">Trabajamos responsablemente</h1>
                         <p style="color: white;"><strong>La inteligencia artificial en el sector médico debe ser
                                 utilizada
@@ -108,32 +107,22 @@
     <!--Carousel End-->
 
     <!-- Carga del archivo Start -->
-    <div id="upload-zone">
-        <div id="img-upload">
-            <img id="documents" src="../static/images/documents.jpg">
-        </div>
-        <div id="upload-files-zone">
-            <h2>Seleccione sus archivos</h2>
-            <p>Por favor seleccione 6 archivos</p>
-            <div class="containerFiles">
-                <form id="upload-form" action="/upload" method="post" enctype="multipart/form-data">
-                    <div class="form-group">
-                        <div class="input-group mb-3">
-                            <input type="file" multiple="multiple" class="form-control form-control-mg" name="loadFile"
-                                id="LoadFile" accept=".csv" onchange="displaySelectedFiles()">
-                            <label class="input-group-text" for="LoadFile">Añadir</label>
-                        </div>
-                    </div>
-                    <p id="fileNames"></p>
-                    <div>
-                        <button id="btn-upload" class="btn btn-primary" type="submit" name="sendFile"
-                            disabled>Cargar</button>
-                    </div>
-                </form>
+    <div class="containerFiles">
+        <form id="upload-form" action="/upload" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <div class="input-group mb-3">
+                    <input type="file" multiple="multiple" class="form-control form-control-mg" name="loadFile"
+                        id="LoadFile" accept=".csv" onchange="displaySelectedFiles()">
+                    <label class="input-group-text" for="LoadFile">Añadir</label>
+                </div>
             </div>
-        </div>
-    </div>
+            <p id="fileNames"></p>
+            <div>
+                <button id="btn-upload" class="btn btn-primary" type="submit" name="sendFile" disabled>Cargar</button>
+            </div>
 
+        </form>
+    </div>
     <!-- Carga del archivo End -->
 
 
