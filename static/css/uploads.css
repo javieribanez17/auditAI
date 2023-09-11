@@ -59,10 +59,10 @@
   margin-left: 2%;
 }
 
-.btn {
+/* .btn {
   background-color: #ffe600;
   border: solid #ffe600;
-}
+} */
 
 #fileNames {
   max-width: 100%;
@@ -74,7 +74,11 @@
   width: 30vw;
 }
 
-#btn-upload {
+#btn-upload:disabled {
   background-color: #62625e;
   border: solid #62625e;
 }
+/* #btn-upload {
+  background-color: #62625e;
+  border: solid #62625e;
+} */
