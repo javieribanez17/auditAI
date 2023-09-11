@@ -19,12 +19,12 @@ boton.addEventListener("click", async function () {
     .then((response) => response.json())
     .then((data) => {
       askrender.innerHTML =
-        '<h5 for="askModel">Respuesta del modelo GPT:</h5> <textarea class="form-control" disabled="true" id="askModel" rows="3"></textarea>';
+        '<div id="test"><h5 for="questionModel">Respuesta del modelo</h5><form action="/" method="get"><button style="margin-bottom: 5px;" type="submit" class="btn btn-outline-secondary consult close"aria-label="Close">Borrar archivos</button></form></div> <textarea class="form-control" disabled="true" id="askModel" rows="3"></textarea>';
       document.getElementById("askModel").textContent = data.answer;
     })
     .catch((error) => console.log(error));
   var pre_q = document.getElementById("pre-question");
-  pre_q.innerHTML = `<h5 style="display: inline">Pregunta realizada: </h5><p style="display: inline">${question.value}</p>`;
+  pre_q.innerHTML = `<h5>Consulta anterior: </h5><p style="display: inline">"${question.value}"</p>`;
   const btnAsk = document.getElementById("btn-ask");
   btnAsk.disabled = true;
   question.value = "";

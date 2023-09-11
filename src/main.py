@@ -128,10 +128,10 @@ def agentAudit(question):
             max_iterations = 5
         )
         responseAgent = agent.run(question)
-        response = gptModel(responseAgent, question)
+        # response = gptModel(responseAgent, question).strip('.\n')
         print(cb)
-        print(response)
-        return response
+        # print(response)
+        return responseAgent
 
 def gptModel(agentResult, agentQuestion):
     response2 = chain.run(answer=agentResult, question=agentQuestion)
