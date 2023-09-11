@@ -1,0 +1,54 @@
+.containerFiles {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    /* background-image: linear-gradient(#333333, #ffe600); */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #dcd16e96; /* Fondo semi-transparente para el formulario */
+    padding: 20px;
+    border-radius: 10px;
+    z-index: 1; /* Coloca el formulario delante del carrusel */
+  }
+  
+  #fileNames{
+    max-width: 100%; 
+    word-wrap: break-word;
+    margin: 0;
+    padding: 0;
+  }
+  
+  #upload-form{
+    width: 30vw;
+  }
+  
+  
+  
+  
+  
+  
+  #myCarousel {
+    /* Estilos para el carrusel */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Coloca el carrusel detrás de todo */
+  }
+  
+
+  .img-carrusel{
+    width: 100vw;
+    height: 100vh;
+  }
+
+  .carousel-inner{
+    height: 100%;
+  }

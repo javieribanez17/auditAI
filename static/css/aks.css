@@ -54,3 +54,7 @@
   display: flex;
   justify-content:space-between;
 }
+
+#div-btn{
+  margin-bottom: 5%;
+}
