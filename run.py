@@ -1,20 +1,22 @@
 from flask import Flask, render_template, request, redirect, jsonify, url_for
 import os
+from dotenv import load_dotenv
 from src.main import cleanCsv, agentAudit
 from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
-userData = {
-            'user': 'Admin',
-            'password': 'Admin123'
-            }
+# userData = {
+#             'user': 'Admin',
+#             'password': 'Admin123'
+#             }
 
 @app.route('/login', methods=['POST'])
 def login():
     newLogin = request.get_json()
-    boolUser = userData['user'] == newLogin['user']
-    boolPassword = userData['password'] == newLogin['password']
+    load_dotenv()
+    boolUser = os.environ["user"] == newLogin['user']
+    boolPassword = os.environ["password"] == newLogin['password']
     if(boolUser and boolPassword):
         return redirect(url_for('home'))
     else:

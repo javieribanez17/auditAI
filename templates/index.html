@@ -1,29 +1,62 @@
 <!DOCTYPE html>
 <html lang="sp">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!-- Archivos de estilo Start -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
-            integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-        <link rel="shortcut icon" href="../static/images/faviconAI.jpg">
-        <!-- Archivos de estilo End -->
-        <link rel="stylesheet" href="../static/css/index.css">
-        <title>index</title>
-    </head>
-    <body>
-        <h1 id="au">
-            Auditor<strong id="IA">IA</strong>
-        </h1>
-        <div id="loginInputs">
-            <img src="../static/images/logo.png" id="logo">
-            <h1>Ingrese su usuario y contraseña</h1>
-            <input id="btn-user" type="text" placeholder="usuario">
-            <input id="btn-password" type="password" placeholder="contraseña">
-            <button id="login-btn">Ingresar</button>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Archivos de estilo Start -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="shortcut icon" href="../static/images/faviconAI.jpg">
+    <!-- Archivos de estilo End -->
+    <link rel="stylesheet" href="../static/css/index.css">
+    <link rel="stylesheet" href="../static/css/files.css">
+    <link rel="stylesheet" href="../static/css/carousel.css">
+    <title>index</title>
+</head>
+
+<body>
+    <!-- Barra de navegación Start -->
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <div class="container-fluid">
+            <a style="font-size: 25px;" class="navbar-brand" href="/">Auditor<strong
+                    style="color: #ffe600;">IA</strong></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Estados financieros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Regulación</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Conócenos</a>
+                    </li>
+                </ul>
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Búsqueda rápida" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Buscar</button>
+                </form>
+            </div>
         </div>
-        
-    </body>
-    <script src="../static/js/index.js"></script>
-    
+    </nav>
+    <!-- Barra de navegación End-->
+    <h1 id="au">
+        Auditor<strong id="IA">IA</strong>
+    </h1>
+    <div id="loginInputs">
+        <img src="../static/images/logo.png" id="logo">
+        <h1>Iniciar sesión</h1>
+        <input id="btn-user" type="text" placeholder="usuario">
+        <input id="btn-password" type="password" placeholder="contraseña">
+        <button class="btn btn-primary" id="login-btn">Ingresar</button>
+    </div>
+
+</body>
+<script src="../static/js/index.js"></script>
+
 </html>

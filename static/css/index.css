@@ -1,78 +1,86 @@
 body {
-    font-family: sans-serif;
-    background: url(../images/fondo.jpg) no-repeat center top;
-    background-size: cover;
-  }
-
-#IA{
-    color: #ffe600;
+  font-family: sans-serif;
+  background: url(../images/fondo.jpg) no-repeat center top;
+  background-size: cover;
 }
 
-#loginInputs{
-    text-align: center;
-    width: 30vw;
-    /* width: 320px;
+#IA {
+  color: #ffe600;
+}
+
+#loginInputs {
+  text-align: center;
+  width: 30vw;
+  /* width: 320px;
     height: 420px; */
-    background: #000;
-    color: #fff;
-    top: 50%;
-    left: 50%;
-    position: absolute;
-    transform: translate(-50%, -50%);
-    box-sizing: border-box;
-    padding: 70px 30px;
+  background: #000;
+  color: #fff;
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  box-sizing: border-box;
+  padding: 70px 30px;
 }
 
 #loginInputs #logo {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    position: absolute;
-    top: -50px;
-    left: calc(50% - 50px);
-  }
-
-#logo{
-    background-color: #fff;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  position: absolute;
+  top: -50px;
+  left: calc(50% - 50px);
 }
 
-#au{
-    color: #fff;
+#logo {
+  background-color: #fff;
+}
+
+#au {
+  color: #fff;
 }
 
 #loginInputs h1 {
-    margin: 0;
-    padding: 0 0 20px;
-    text-align: center;
-    font-size: 22px;
+  margin: 0;
+  padding: 0 0 20px;
+  text-align: center;
+  font-size: 22px;
 }
 
+#loginInputs input[type="text"],
+#loginInputs input[type="password"] {
+  border: none;
+  border-bottom: 1px solid #fff;
+  background: transparent;
+  outline: none;
+  height: 40px;
+  width: 100%;
+  color: #fff;
+  font-size: 16px;
+}
 
-#loginInputs input[type="text"], #loginInputs input[type="password"] {
-    border: none;
-    border-bottom: 1px solid #fff;
-    background: transparent;
-    outline: none;
-    height: 40px;
-    width: 100%;
-    color: #fff;
-    font-size: 16px;
+#btn-user:focus {
+  border-color: #ffe600;
+  box-shadow: 0 0 10px #ffe600;
+}
+
+#btn-password:focus {
+  border-color: #ffe600;
+  box-shadow: 0 0 10px #ffe600;
 }
 
 #loginInputs button {
-    margin-top: 5%;
-    border: none;
-    outline: none;
-    height: 40px;
-    background: #ffe600;
-    color: #fff;
-    font-size: 18px;
-    border-radius: 20px;
+  margin-top: 5%;
+  border: none;
+  outline: none;
+  height: 40px;
+  background: #ffe600;
+  color: #333333;
+  font-size: 18px;
 }
 
 #loginInputs button:hover {
-    cursor: pointer;
-    background: #fefb6e;
-    color: #000;
+  background-color: #ffe600;
+  border-color: green;
+  color: green;
 }
-

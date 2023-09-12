@@ -10,7 +10,7 @@ if (document.getElementById("btn-ask")) {
     };
     document.getElementById("questionModel").textContent = "";
     //https://gptaudit.azurewebsites.net/gpt for azure development - http://localhost:5000/gpt for local development
-    await fetch("http://localhost:5000/gpt", {
+    await fetch("https://gptaudit.azurewebsites.net/gpt", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -20,7 +20,7 @@ if (document.getElementById("btn-ask")) {
       .then((response) => response.json())
       .then((data) => {
         askrender.innerHTML =
-          '<div id="test"><h5 for="questionModel">Respuesta del modelo</h5><form action="/" method="get"><button style="margin-bottom: 5px;" type="submit" class="btn btn-outline-secondary consult close"aria-label="Close">Borrar archivos</button></form></div> <textarea class="form-control" disabled="true" id="askModel" rows="3"></textarea>';
+          '<div id="test"><h5 for="questionModel">Respuesta del modelo</h5><form action="/home" method="get"><button style="margin-bottom: 5px;" type="submit" class="btn btn-outline-secondary consult close"aria-label="Close">Volver</button></form></div> <textarea class="form-control" disabled="true" id="askModel" rows="3"></textarea>';
         document.getElementById("askModel").textContent = data.answer;
       })
       .catch((error) => console.log(error));
@@ -43,7 +43,7 @@ if (document.getElementById("login-btn")) {
       user: user.value,
       password: password.value,
     };
-    fetch("http://localhost:5000/login", {
+    fetch("https://gptaudit.azurewebsites.net/login", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -53,7 +53,7 @@ if (document.getElementById("login-btn")) {
       if (response.status === 200) {
         window.location.href = response.url;
       } else {
-        alert("error");
+        alert("Usuario no registrado");
       }
     });
   });
