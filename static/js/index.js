@@ -1,29 +1,61 @@
-var boton = document.getElementById("btn-ask");
-boton.addEventListener("click", async function () {
-  var container = document.getElementById("loaderContainer");
-  container.style.display = "block";
-  var question = document.getElementById("questionModel");
-  const gpt = {
-    question: question.value,
-  };
-  document.getElementById("questionModel").textContent = "";
-  await fetch("https://gptaudit.azurewebsites.net/gpt", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(gpt),
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      document.getElementById("askModel").textContent = data.answer;
+if(document.getElementById("btn-ask")){
+  var boton = document.getElementById("btn-ask");
+  boton.addEventListener("click", async function () {
+    var container = document.getElementById("loaderContainer");
+    container.style.display = "block";
+    var question = document.getElementById("questionModel");
+    const gpt = {
+      question: question.value,
+    };
+    document.getElementById("questionModel").textContent = "";
+    await fetch("https://gptaudit.azurewebsites.net/gpt", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(gpt),
     })
-    .catch((error) => console.log(error));
-  var pre_q = document.getElementById("pre-question");
-  pre_q.textContent = "Pregunta previa: " + question.value;
-  const btnAsk = document.getElementById("btn-ask");
-  btnAsk.disabled = true;
-  question.value = "";
-  container.style.display = "none";
-  pre_q.style.display = "block";
-});
+      .then((response) => response.json())
+      .then((data) => {
+        document.getElementById("askModel").textContent = data.answer;
+      })
+      .catch((error) => console.log(error));
+    var pre_q = document.getElementById("pre-question");
+    pre_q.textContent = "Pregunta previa: " + question.value;
+    const btnAsk = document.getElementById("btn-ask");
+    btnAsk.disabled = true;
+    question.value = "";
+    container.style.display = "none";
+    pre_q.style.display = "block";
+  });
+}
+
+
+if(document.getElementById('login-btn')){
+  var loginBtn = document.getElementById('login-btn');
+  loginBtn.addEventListener("click", function(){
+    var user = document.getElementById("btn-user");
+    var password = document.getElementById("btn-password");
+    const userData = {
+      user: user.value,
+      password: password.value
+    }
+    fetch("http://localhost:5000/login", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify(userData),
+    })
+    .then(response => {
+      if(response.status === 200){
+        window.location.href = response.url;
+      }else {
+        alert("error")
+      }
+      
+    })
+  })
+}
+
+
