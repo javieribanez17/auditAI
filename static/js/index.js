@@ -9,7 +9,7 @@ boton.addEventListener("click", async function () {
   };
   document.getElementById("questionModel").textContent = "";
   //https://gptaudit.azurewebsites.net/gpt for azure development - http://localhost:5000/gpt for local development
-  await fetch("https://gptaudit.azurewebsites.net/gpt", {
+  await fetch("http://localhost:5000/gpt", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
