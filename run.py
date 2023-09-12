@@ -1,17 +1,33 @@
-from flask import Flask, render_template, request, redirect, jsonify
+from flask import Flask, render_template, request, redirect, jsonify, url_for
 import os
 from src.main import cleanCsv, agentAudit
 from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
-@app.route('/home', methods=['GET'])
-def index():
-    return redirect("/")
+userData = {
+            'user': 'Admin',
+            'password': 'Admin123'
+            }
 
-@app.route('/', methods=['GET'])
+@app.route('/login', methods=['POST'])
+def login():
+    newLogin = request.get_json()
+    boolUser = userData['user'] == newLogin['user']
+    boolPassword = userData['password'] == newLogin['password']
+    if(boolUser and boolPassword):
+        return redirect(url_for('home'))
+    else:
+        message = "El usuario o contraseña no son validos"
+        return jsonify({'error': message}), 401
+    
+@app.route('/home', methods=['GET'])
 def home():
     return render_template('home.html')
+
+@app.route('/', methods=['GET'])
+def index():
+    return render_template('index.html')
 
 @app.route('/gpt', methods=['POST'])
 def agent():
