@@ -34,7 +34,25 @@ from langchain.llms import AzureOpenAI
 import os
 import pandas as pd
 from langchain.agents import create_csv_agent
+from langchain import PromptTemplate
 
+
+#--------------------Configuración ddel modelo GPT 3.5-----------------
+prompt = PromptTemplate(
+    input_variables = ["answer", "question"],
+    template="Tú eres un asistente de auditoría y tu función es reescribir la siguiente respuesta de la forma más clara posible en una frase:\n{answer}\nTeniendo en cuenta que la pregunta fue:\n{question}"
+)
+load_dotenv()
+model = AzureOpenAI(
+    openai_api_base=os.environ["openai_api_base"],
+    openai_api_version="2023-05-15",
+    deployment_name="TestDavinci003",
+    model="text-davinci-003",
+    openai_api_key= os.environ["openai_api_key"],
+    openai_api_type="azure",
+    temperature=0
+)
+chain = LLMChain(llm = model, prompt= prompt)
 #COMBINACION DE CSVs
 # ------------- QUITAR CEROS A CUPS ----------------------------------------------------------------------------------------------------
 
@@ -107,9 +125,18 @@ def agentAudit(question):
             ["./data/RESULT.csv"],
             verbose=True,
             agent_type=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
+            max_iterations = 5
         )
-        response = agent.run(question)
+        responseAgent = agent.run(question)
+        # response = gptModel(responseAgent, question).strip('.\n')
         print(cb)
-        return response
-# agentAudit()
+        # print(response)
+        return responseAgent
+
+def gptModel(agentResult, agentQuestion):
+    response2 = chain.run(answer=agentResult, question=agentQuestion)
+    print(response2)
+    return response2
+
+# agentAudit("Dime el nombre completo y el número de identificación de los usuarios cuyo sexo no es pertinente en relación con su procedimiento")
 # ------------------------------------------------------------------------------------------------------------------------------------------

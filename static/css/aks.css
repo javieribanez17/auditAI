@@ -8,10 +8,20 @@
   display: flex;
   justify-content: center;
 }
-.btn-primary {
+
+.prevQuestion h5,
+p {
+  display: inline;
+}
+
+.textBox {
   margin-top: 10px;
 }
 
+.form-control:focus {
+  border-color: #ffe600;
+  box-shadow: 0 0 10px #ffe600;
+}
 
 #loaderContainer {
   display: none;
@@ -46,15 +56,16 @@
   }
 }
 
-#pre-question{
-  display: none;
-}
-
-#test{
+#test {
   display: flex;
-  justify-content:space-between;
+  justify-content: space-between;
 }
 
-#div-btn{
+#btn-ask:disabled {
+  background-color: gray;
+  border-color: #ffe600;
+}
+
+#div-btn {
   margin-bottom: 5%;
 }
