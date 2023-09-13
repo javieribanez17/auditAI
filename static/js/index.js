@@ -10,7 +10,7 @@ if (document.getElementById("btn-ask")) {
     };
     document.getElementById("questionModel").textContent = "";
     //https://gptaudit.azurewebsites.net/gpt for azure development - http://localhost:5000/gpt for local development
-    await fetch("http://localhost:5000/gpt", {
+    await fetch("https://gptaudit.azurewebsites.net/gpt", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -43,7 +43,7 @@ if (document.getElementById("login-btn")) {
       user: user.value,
       password: password.value,
     };
-    fetch("http://localhost:5000/login", {
+    fetch("https://gptaudit.azurewebsites.net/login", {
       method: "POST",
       headers: {
         "Content-type": "application/json",

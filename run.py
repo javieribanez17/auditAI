@@ -6,10 +6,6 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
-# userData = {
-#             'user': 'Admin',
-#             'password': 'Admin123'
-#             }
 isLogin = False
 
 @app.route('/login', methods=['POST'])

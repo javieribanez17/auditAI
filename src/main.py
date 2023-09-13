@@ -1,41 +1,13 @@
-import PyPDF2
-import re
 from dotenv import load_dotenv
 import pandas as pd
-from langchain.agents import create_pandas_dataframe_agent
 from langchain.agents.agent_types import AgentType
-from langchain.text_splitter import CharacterTextSplitter
-from langchain.embeddings.openai import OpenAIEmbeddings
-from langchain.vectorstores import FAISS
-from langchain.llms import OpenAI
 from langchain.callbacks import get_openai_callback
-from langchain.chains.question_answering import load_qa_chain
-from langchain.document_loaders import UnstructuredPDFLoader
-from langchain.document_loaders import PyPDFLoader
-from langchain.text_splitter import TokenTextSplitter
-from langchain.document_loaders import GutenbergLoader
-from langchain.vectorstores import Chroma
-from langchain import LLMChain
-from langchain.vectorstores import Chroma
-from langchain.chains import RetrievalQA
-from langchain.docstore.document import Document
-from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain.agents import AgentExecutor, Tool, ZeroShotAgent
-from langchain.memory import ConversationBufferMemory
-from langchain.agents import create_sql_agent
-from langchain.agents.agent_toolkits import SQLDatabaseToolkit
-from langchain.sql_database import SQLDatabase
 from langchain.llms import OpenAI
-from langchain.agents import AgentExecutor
 from langchain.agents.agent_types import AgentType
-from langchain.chat_models import ChatOpenAI
-from langchain.chat_models import AzureChatOpenAI
 from langchain.llms import AzureOpenAI
 import os
 import pandas as pd
 from langchain.agents import create_csv_agent
-from langchain import PromptTemplate
-from langchain.agents import Tool
 
 load_dotenv()
 model = AzureOpenAI(
@@ -52,8 +24,6 @@ model = AzureOpenAI(
 # ------------- QUITAR CEROS A CUPS ----------------------------------------------------------------------------------------------------
 
 def cleanCsv():
-    # def quitar_ceros_izquierda(valor):    
-    #     return valor.lstrip('0')
     # ------------- AGREGAR COLUMNAS A LOS ARCHIVOS ----------------------------------------------------------------------------------------------------
     # Agregar columnas a CIE10
     df = pd.read_csv('./data/CIE10.csv', low_memory=False, header=None)
@@ -71,10 +41,6 @@ def cleanCsv():
     df = pd.read_csv('./data/US.csv', low_memory=False, header=None)
     df.columns = ['Tipo de doc','Numero de identificacion','Codigo entidad','Tipo de usuario','Apellido','Apellido 2','Nombre','Nombre 2','Edad','Unidad de medida','Sexo del usuario','Departamento','Municipio','Zona']
     df.to_csv('./data/US.csv', index=False)
-    # ------------- CLEAR CUPS ----------------------------------------------------------------------------------------------------
-    # proced_df = pd.read_csv('./data/CUPS.csv', header=None)
-    # proced_df['Codigo del procedimiento'] = proced_df['Codigo del procedimiento'].apply(quitar_ceros_izquierda)
-    # proced_df.to_csv('./CUPS.csv', index=False)
     # ------------- MERGE DE AP y US ----------------------------------------------------------------------------------------------------
     df1 = pd.read_csv('./data/US.csv', low_memory=False)
     df1['Numero de identificacion'] = df1['Numero de identificacion'].astype(str)
