@@ -10,14 +10,17 @@ CORS(app)
 #             'user': 'Admin',
 #             'password': 'Admin123'
 #             }
+isLogin = False
 
 @app.route('/login', methods=['POST'])
 def login():
+    global isLogin
     newLogin = request.get_json()
     load_dotenv()
     boolUser = os.environ["user"] == newLogin['user']
     boolPassword = os.environ["password"] == newLogin['password']
     if(boolUser and boolPassword):
+        isLogin = True
         return redirect(url_for('home'))
     else:
         message = "El usuario o contraseña no son validos"
@@ -25,10 +28,16 @@ def login():
     
 @app.route('/home', methods=['GET'])
 def home():
-    return render_template('home.html')
+    global isLogin
+    if isLogin is True:
+        return render_template('home.html')
+    else:
+        return render_template('index.html')
 
 @app.route('/', methods=['GET'])
 def index():
+    global isLogin
+    isLogin = False
     return render_template('index.html')
 
 @app.route('/gpt', methods=['POST'])

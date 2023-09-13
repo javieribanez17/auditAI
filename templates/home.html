@@ -19,7 +19,7 @@
     <!-- Barra de navegación Start -->
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <div class="container-fluid">
-            <a style="font-size: 25px;" class="navbar-brand" href="/">Auditor<strong
+            <a style="font-size: 25px;" class="navbar-brand" href="/home">Auditor<strong
                     style="color: #ffe600;">IA</strong></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -128,6 +128,7 @@
                 </div>
         </div>
     </div> -->
+    <!-- Carga de documentos Start -->
     <div id="containerG">
         <div class="container-img">
             <div class="child-img">
@@ -141,7 +142,7 @@
                 <h3>Sube tus documentos</h3>
                 <p>Los archivos cargados en esta plataforma son alojados en la nube privada de EY. Una vez añadas los
                     sigueintes 6 archivos en formato ".csv", da clic en el botón Cargar y analizalos con nuestra
-                    herramienta de IA.
+                    herramienta de <strong>Auditor<span style="color: #ffe600;">IA</span></strong>.
                 </p>
                 <ul>
                     <li><strong>AP:</strong> Archivo de procedimientos</li>
@@ -162,15 +163,42 @@
                     </div>
                     <p id="fileNames"></p>
                     <div>
-                        <button id="btn-upload" class="btn btn-primary" type="submit" name="sendFile"
-                            disabled>Cargar</button>
+                        <button id="btn-upload" class="btn btn-primary" style="margin-bottom: 15px;" type="submit"
+                            name="sendFile" disabled>Cargar</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+    <!-- Carga de documentos End -->
 
-    <!-- Carga del archivo End -->
+    <section class="footer">
+        <!-- Footer -->
+        <footer class="text-center text-white" style="background-color: #212529">
+            <!-- Grid container -->
+            <div class="container p-4 pb-0">
+                <!-- Section: CTA -->
+                <section class="">
+                    <p class="d-flex justify-content-center align-items-center">
+                        <span class="me-3">Únete a nosotros</span>
+                        <button type="button" class="btn btn-outline-light btn-rounded">
+                            Suscribirse
+                        </button>
+                    </p>
+                </section>
+                <!-- Section: CTA -->
+            </div>
+            <!-- Grid container -->
+
+            <!-- Copyright -->
+            <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+                <img src="../static/images/EYlogo.png" alt="EY" style="width: 5%;">
+                <!-- <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a> -->
+            </div>
+            <!-- Copyright -->
+        </footer>
+        <!-- Footer -->
+    </section>
 
 
     <script src="../static/js/animations.js"></script>
