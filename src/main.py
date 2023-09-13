@@ -25,7 +25,7 @@ from langchain.memory import ConversationBufferMemory
 from langchain.agents import create_sql_agent
 from langchain.agents.agent_toolkits import SQLDatabaseToolkit
 from langchain.sql_database import SQLDatabase
-from langchain.llms.openai import OpenAI
+from langchain.llms import OpenAI
 from langchain.agents import AgentExecutor
 from langchain.agents.agent_types import AgentType
 from langchain.chat_models import ChatOpenAI
@@ -36,12 +36,6 @@ import pandas as pd
 from langchain.agents import create_csv_agent
 from langchain import PromptTemplate
 
-
-#--------------------Configuración ddel modelo GPT 3.5-----------------
-prompt = PromptTemplate(
-    input_variables = ["answer", "question"],
-    template="Tú eres un asistente de auditoría y tu función es reescribir la siguiente respuesta de la forma más clara posible en una frase:\n{answer}\nTeniendo en cuenta que la pregunta fue:\n{question}"
-)
 load_dotenv()
 model = AzureOpenAI(
     openai_api_base=os.environ["openai_api_base"],
@@ -52,7 +46,7 @@ model = AzureOpenAI(
     openai_api_type="azure",
     temperature=0
 )
-chain = LLMChain(llm = model, prompt= prompt)
+
 #COMBINACION DE CSVs
 # ------------- QUITAR CEROS A CUPS ----------------------------------------------------------------------------------------------------
 
@@ -132,11 +126,3 @@ def agentAudit(question):
         print(cb)
         # print(response)
         return responseAgent
-
-def gptModel(agentResult, agentQuestion):
-    response2 = chain.run(answer=agentResult, question=agentQuestion)
-    print(response2)
-    return response2
-
-# agentAudit("Dime el nombre completo y el número de identificación de los usuarios cuyo sexo no es pertinente en relación con su procedimiento")
-# ------------------------------------------------------------------------------------------------------------------------------------------
