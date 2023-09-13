@@ -35,6 +35,7 @@ import os
 import pandas as pd
 from langchain.agents import create_csv_agent
 from langchain import PromptTemplate
+from langchain.agents import Tool
 
 
 #--------------------Configuración ddel modelo GPT 3.5-----------------
@@ -108,9 +109,23 @@ def cleanCsv():
     resultado_df = pd.merge(resultado_df, df2, on='Codigo del procedimiento', how='left')
     # # ------------- CLEAR COLUMNS ----------------------------------------------------------------------------------------------------
     RESULT_DF = resultado_df.drop(columnas, axis=1)
+    column = "Sexo del procedimiento"
+    gen = 'Z'
+    RESULT_DF['Sexo del procedimiento'] = RESULT_DF.apply(changeGen, args=(column, gen), axis=1)
+    column = 'Sexo del diagnostico'
+    gen = 'A'
+    RESULT_DF['Sexo del diagnostico'] = RESULT_DF.apply(changeGen, args=(column, gen), axis=1)
     RESULT_DF.to_csv('./data/RESULT.csv', index=False)
 # ------------- CALL TO AGENT ----------------------------------------------------------------------------------------------------
-def agentAudit(question):    
+
+def changeGen(row, column, gen):
+    if row[column] == gen:
+        return row['Sexo del usuario']
+    else:
+        return row[column]
+    
+
+def agentAudit(question):  
     with get_openai_callback() as cb:
         load_dotenv()
         agent = create_csv_agent(
