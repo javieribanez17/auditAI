@@ -81,6 +81,7 @@ body {
 
 #loginInputs button:hover {
   background-color: #ffe600;
-  border-color: green;
+  border: solid 2px;
+  border-color: white;
   color: green;
 }

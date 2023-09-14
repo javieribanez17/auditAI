@@ -9,8 +9,8 @@ if (document.getElementById("btn-ask")) {
       question: question.value,
     };
     document.getElementById("questionModel").textContent = "";
-    //https://gptaudit.azurewebsites.net/gpt for azure development - http://localhost:5000/gpt for local development
-    await fetch("https://gptaudit.azurewebsites.net/gpt", {
+    //https://gptaudit.azurewebsites.net/gpt - https://eyauditoria.azurewebsites.net/ for azure development - http://localhost:5000/gpt for local development
+    await fetch("https://eyauditoria.azurewebsites.net/gpt", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -43,7 +43,7 @@ if (document.getElementById("login-btn")) {
       user: user.value,
       password: password.value,
     };
-    fetch("https://gptaudit.azurewebsites.net/login", {
+    fetch("https://eyauditoria.azurewebsites.net/login", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
