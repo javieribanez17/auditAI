@@ -89,15 +89,15 @@ def agentAudit(question):
     with get_openai_callback() as cb:
         load_dotenv()
         agent = create_csv_agent(
-            # OpenAI(temperature=0, openai_api_key=os.environ["OPENAI_API_KEY"]),
-            AzureOpenAI(openai_api_base=os.environ["openai_api_base"],
-                openai_api_version="2023-05-15",
-                deployment_name="TestDavinci003",
-                model="text-davinci-003",
-                openai_api_key= os.environ["openai_api_key"],
-                openai_api_type="azure",
-                temperature=0
-            ),
+            OpenAI(temperature=0, openai_api_key=os.environ["OPENAI_API_KEY"]),
+            # AzureOpenAI(openai_api_base=os.environ["openai_api_base"],
+            #     openai_api_version="2023-05-15",
+            #     deployment_name="TestDavinci003",
+            #     model="text-davinci-003",
+            #     openai_api_key= os.environ["openai_api_key"],
+            #     openai_api_type="azure",
+            #     temperature=0
+            # ),
             ["./data/RESULT.csv"],
             verbose=True,
             agent_type=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
