@@ -64,4 +64,4 @@ jobs:
         with:
           app-name: 'auditoriaey'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_6E0ED54BE3B440578E4CCB95E74A3DD1 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_7B18ED0CEE994918B601B5A8B9147B9D }}
