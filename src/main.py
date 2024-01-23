@@ -1,15 +1,15 @@
 from dotenv import load_dotenv
-import pandas as pd
-from langchain.agents.agent_types import AgentType
-from langchain.callbacks import get_openai_callback
-from langchain.llms import OpenAI
-from langchain.agents.agent_types import AgentType
-from langchain.llms import AzureOpenAI
 import os
 import pandas as pd
-from langchain.agents import create_csv_agent
+# from langchain.llms import AzureOpenAI
+from langchain.agents.agent_types import AgentType
+#from langchain.agents import create_csv_agent
+from langchain_experimental.agents.agent_toolkits import create_csv_agent, create_pandas_dataframe_agent
+from langchain_community.callbacks import get_openai_callback
+from langchain_openai import AzureOpenAI, OpenAI
+#from langchain.llms import OpenAI
 
-# load_dotenv()
+load_dotenv()
 # model = AzureOpenAI(
 #     openai_api_base=os.environ["openai_api_base"],
 #     openai_api_version="2023-05-15",
@@ -26,21 +26,21 @@ from langchain.agents import create_csv_agent
 def cleanCsv():
     # ------------- AGREGAR COLUMNAS A LOS ARCHIVOS ----------------------------------------------------------------------------------------------------
     # Agregar columnas a CIE10
-    df = pd.read_csv('./data/CIE10.csv', low_memory=False, header=None)
-    df.columns = ['Codigo del diagnostico', 'Nombre del diagnostico','Sexo del diagnostico']
-    df.to_csv('./data/CIE10.csv', index=False)
+    dff = pd.read_csv('./data/CIE10.csv', low_memory=False, header=None)
+    dff.columns = ['Codigo del diagnostico', 'Nombre del diagnostico','Sexo del diagnostico']
+    dff.to_csv('./data/CIE10.csv', index=False)
     # Agregar columnas a CUPS
-    df = pd.read_csv('./data/CUPS.csv', low_memory=False, header=None)
-    df.columns = ['Codigo del procedimiento', 'Nombre del procedimiento', 'Sexo del procedimiento']
-    df.to_csv('./data/CUPS.csv', index=False)
+    dff = pd.read_csv('./data/CUPS.csv', low_memory=False, header=None)
+    dff.columns = ['Codigo del procedimiento', 'Nombre del procedimiento', 'Sexo del procedimiento']
+    dff.to_csv('./data/CUPS.csv', index=False)
     # Agregar columnas a AP
-    df = pd.read_csv('./data/AP.csv', low_memory=False, header=None)
-    df.columns = ['Factura','Codigo prestador','Tipo de documento','Numero de identificacion','Fecha Procedimiento','# Autorizacion','Codigo del procedimiento','Ambito Procedimiento','Finalidad','Personal que atiende','Codigo del diagnostico','DX Relacionado','Complicacion','Forma de realizacion','Valor procedimiento']
-    df.to_csv('./data/AP.csv', index=False)
+    dff = pd.read_csv('./data/AP.csv', low_memory=False, header=None)
+    dff.columns = ['Factura','Codigo prestador','Tipo de documento','Numero de identificacion','Fecha Procedimiento','# Autorizacion','Codigo del procedimiento','Ambito Procedimiento','Finalidad','Personal que atiende','Codigo del diagnostico','DX Relacionado','Complicacion','Forma de realizacion','Valor procedimiento']
+    dff.to_csv('./data/AP.csv', index=False)
     # Agregar columnas a AC
-    df = pd.read_csv('./data/US.csv', low_memory=False, header=None)
-    df.columns = ['Tipo de doc','Numero de identificacion','Codigo entidad','Tipo de usuario','Apellido','Apellido 2','Nombre','Nombre 2','Edad','Unidad de medida','Sexo del usuario','Departamento','Municipio','Zona']
-    df.to_csv('./data/US.csv', index=False)
+    dff = pd.read_csv('./data/US.csv', low_memory=False, header=None)
+    dff.columns = ['Tipo de doc','Numero de identificacion','Codigo entidad','Tipo de usuario','Apellido','Apellido 2','Nombre','Nombre 2','Edad','Unidad de medida','Sexo del usuario','Departamento','Municipio','Zona']
+    dff.to_csv('./data/US.csv', index=False)
     # ------------- MERGE DE AP y US ----------------------------------------------------------------------------------------------------
     df1 = pd.read_csv('./data/US.csv', low_memory=False)
     df1['Numero de identificacion'] = df1['Numero de identificacion'].astype(str)
@@ -76,6 +76,7 @@ def cleanCsv():
     gen = 'A'
     RESULT_DF['Sexo del diagnostico'] = RESULT_DF.apply(changeGen, args=(column, gen), axis=1)
     RESULT_DF.to_csv('./data/RESULT.csv', index=False)
+    
 # ------------- CALL TO AGENT ----------------------------------------------------------------------------------------------------
 
 def changeGen(row, column, gen):
@@ -86,11 +87,14 @@ def changeGen(row, column, gen):
     
 
 def agentAudit(question):  
+    df = pd.read_csv('./data/RESULT.csv')
     with get_openai_callback() as cb:
         load_dotenv()
-        agent = create_csv_agent(
-            OpenAI(temperature=0, openai_api_key=os.environ["OPENAI_API_KEY"]),
-            # AzureOpenAI(openai_api_base=os.environ["openai_api_base"],
+        agent = create_pandas_dataframe_agent(
+            OpenAI(temperature=0, 
+                   openai_api_key=os.environ["OPENAI_API_KEY"]),
+            # AzureOpenAI (
+            #     openai_api_base=os.environ["openai_api_base"],
             #     openai_api_version="2023-05-15",
             #     deployment_name="TestDavinci003",
             #     model="text-davinci-003",
@@ -98,13 +102,13 @@ def agentAudit(question):
             #     openai_api_type="azure",
             #     temperature=0
             # ),
-            ["./data/RESULT.csv"],
-            verbose=True,
-            agent_type=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
-            max_iterations = 5
+                df=df,
+                verbose=True,
+                agent_type=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
+                max_iterations = 7,
         )
-        responseAgent = agent.run(question)
+        responseAgent = agent.invoke(question+'Debes traducir a español tu "Final Answer"')
         # response = gptModel(responseAgent, question).strip('.\n')
         print(cb)
-        # print(response)
-        return responseAgent
+        print(responseAgent)
+        return responseAgent['output']
