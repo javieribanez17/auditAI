@@ -11,7 +11,7 @@ if (document.getElementById("btn-ask")) {
     document.getElementById("questionModel").textContent = "";
     //https://gptaudit.azurewebsites.net/gpt - https://eyauditoria.azurewebsites.net/ for azure development - http://localhost:5000/gpt for local development
     /*https://auditoriaey.azurewebsites.net/gpt */
-    await fetch("https://auditoriaey.azurewebsites.net/gpt", {
+    await fetch("http://localhost:5000/gpt", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -45,7 +45,7 @@ if (document.getElementById("login-btn")) {
       password: password.value,
     };
     /*https://auditoriaey.azurewebsites.net/login*/
-    fetch("https://auditoriaey.azurewebsites.net/login", {
+    fetch("http://localhost:5000/login", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
